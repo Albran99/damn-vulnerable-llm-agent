@@ -32,8 +32,14 @@ pip install python-dotenv
 
 Before running the application, you need to setup a .env file based on the provided env templates. The env templates have a model_name variable which can be chosen from the list of models mentioned in llm-config.yaml.
 
-#### To run with OpenAI
-You need to drop a valid OpenAI API key in the .env file (that you can create by copying the .env.openai.template).
+#### To run with OpenRouter
+Create `.env` from the OpenRouter template, then replace the placeholder with your OpenRouter API key. Do not put a real key in a tracked template file.
+
+```sh
+cp .env.openrouter.template .env
+```
+
+The default model is `openrouter/openai/gpt-4o-mini`. To use another OpenRouter model, update its value in `llm-config.yaml`.
 
 #### To run with Models from HuggingFace
 You need to drop a valid HuggingFace Token in the .env file (that you can create by copying the .env.huggingface.template). Note: It is possible that you may not see reasonable results with the chosen models yet.
@@ -59,7 +65,7 @@ To build and run the Docker image:
 ```sh
 docker build -t dvla .
 
-# Populate the env.list with necessary environment variables (just the OpenAI API key), then run:
+# Populate env.list with OPENROUTER_API_KEY and model_name, then run:
 docker run --env-file env.list -p 8501:8501 dvla
 
 ```

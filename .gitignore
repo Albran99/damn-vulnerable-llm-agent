@@ -5,4 +5,5 @@ rate_limit.db
 transactions.db
 __pycache__
 .env.*
+.venv/
 .env.openai.template

@@ -58,6 +58,11 @@ for idx, msg in enumerate(msgs.messages):
         st.write(msg.content)
 
 if prompt := st.chat_input(placeholder="Show my recent transactions"):
+    openrouter_api_key = os.getenv("OPENROUTER_API_KEY", "")
+    if not openrouter_api_key.startswith("sk-or-v1-"):
+        st.error("OPENROUTER_API_KEY is missing or invalid. Add a valid OpenRouter key to .env, not the template file.")
+        st.stop()
+
     st.chat_message("user").write(prompt)
     
     llm = ChatLiteLLM(
@@ -86,6 +91,3 @@ if prompt := st.chat_input(placeholder="Show my recent transactions"):
 
 display_instructions()
 display_logo()
-
-
-        
